@@ -5,15 +5,40 @@ import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { AiOutlineApi } from "react-icons/ai";
 import { MdAutoAwesomeMosaic } from "react-icons/md";
 import { Player } from "@lottiefiles/react-lottie-player";
+import FramerReorder from "./FramerReorder";
+import { motion } from "framer-motion"
 // import lottieAnim from "../../assets/saltagetanim.json";
 
 const Home = () => {
   return (
     <section>
-      <div className="min-h-screen bg-[linear-gradient(30deg,#010223_30%,black)] text-center">
+      <motion.div
+       className="min-h-screen flex flex-col justify-between text-center"
+       initial={{
+         background: "linear-gradient(30deg, #010223 30%, black)"  // Orientación inicial
+       }}
+       animate={{
+         background: [
+           "linear-gradient(30deg, #010223 30%, black)",      // Inicial
+           "linear-gradient(90deg, #010223 60%, black)",      // Dominio del azul (más azul)
+           "linear-gradient(150deg, #010223 95%, black)",     // Dominio del negro (más negro)
+           "linear-gradient(30deg, #010223 30%, black)"       // Regresa a la inicial
+         ]
+       }}
+       transition={{
+         duration: 10,  // Duración de cada ciclo
+         repeat: Infinity,  // Loop infinito
+         repeatType: "mirror",  // Hace que se repita de manera suave sin saltos
+         ease: "easeInOut",  // Transición suave
+       }}
+       style={{
+         height: "100%",  // Asegura que ocupe toda la pantalla
+         width: "100%",   // Asegura que ocupe toda la pantalla
+       }}
+    >
         <Header />
-        <section className="flex flex-col w-full items-center">
-          <div className="max-w-4xl flex flex-col pt-32">
+        <section className="flex flex-col justify-between w-full items-center">
+          <div className="max-w-4xl flex flex-col">
             <h1 className="text-5xl font-extrabold text-white font lg:text-8xl">
               SALTAGET
             </h1>
@@ -26,9 +51,14 @@ const Home = () => {
               transformación digital.
             </p>
           </div>
+          
         </section>
-      </div>
-      <div id="servicios" className="flex flex-col w-full bg-slate-100 py-10 gap-10">
+        <FramerReorder />
+        </motion.div>
+      <div
+        id="servicios"
+        className="flex flex-col w-full bg-slate-100 py-10 gap-10"
+      >
         <h1 className="font-semibold text-gray-700 text-5xl text-center">
           Servicios
         </h1>
@@ -119,7 +149,10 @@ const Home = () => {
         </div>
       </div>
       <footer className="h-20 flex w-full bg-gradient-to-r from-blue-950 to-black justify-center items-center">
-        <p className="text-white font-semibold"><span className="font-bold text-slate-400">SaltaGet©</span> Todos los derechos reservados.</p>
+        <p className="text-white font-semibold">
+          <span className="font-bold text-slate-400">SaltaGet©</span> Todos los
+          derechos reservados.
+        </p>
       </footer>
     </section>
   );
