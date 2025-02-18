@@ -5,7 +5,7 @@ import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import { AiOutlineApi } from "react-icons/ai";
 import { MdAutoAwesomeMosaic } from "react-icons/md";
 import { Player } from "@lottiefiles/react-lottie-player";
-import lottieAnim from "../../assets/saltagetanim.json";
+// import lottieAnim from "../../assets/saltagetanim.json";
 
 const Home = () => {
   return (
