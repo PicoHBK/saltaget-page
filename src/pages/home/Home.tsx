@@ -102,7 +102,7 @@ const Home = () => {
             <h2 className="text-4xl text-slate-400 font-bold text-center">
               Creando el futuro del software
             </h2>
-            <p className="text-lg text-slate-400 font-bold text-center">
+            <p className="text-lg text-slate-600 font-bold text-center">
               En Saltaget, desarrollamos soluciones web, de escritorio y móviles
               con tecnología moderna y escalable. Nuestro equipo convierte ideas
               en productos digitales eficientes y de alto rendimiento
