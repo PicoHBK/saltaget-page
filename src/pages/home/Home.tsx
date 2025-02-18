@@ -110,7 +110,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col w-full">
             <Player
-              src={lottieAnim}
+              src="https://lottie.host/0c901d7c-d795-4823-a330-7af603794a39/FKWoSbAp6g.json"
               className="w-full h-full object-cover"
               autoplay
               loop
