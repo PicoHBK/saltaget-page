@@ -7,7 +7,7 @@ import { MdAutoAwesomeMosaic } from "react-icons/md";
 import { Player } from "@lottiefiles/react-lottie-player";
 import FramerReorder from "./FramerReorder";
 import { motion } from "framer-motion"
-// import lottieAnim from "../../assets/saltagetanim.json";
+import lottieAnim from "../../assets/saltagetanim.json";
 
 const Home = () => {
   return (
@@ -140,7 +140,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col w-full">
             <Player
-              src="https://lottie.host/0c901d7c-d795-4823-a330-7af603794a39/FKWoSbAp6g.json"
+              src={lottieAnim}
               className="w-full h-full object-cover"
               autoplay
               loop
