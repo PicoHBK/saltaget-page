@@ -7,7 +7,7 @@ import { MdAutoAwesomeMosaic } from "react-icons/md";
 import { Player } from "@lottiefiles/react-lottie-player";
 import FramerReorder from "./FramerReorder";
 import { motion } from "framer-motion"
-import lottieAnim from "../../assets/saltagetanim.json";
+import lottieAnim from "../../assets/lottiemodsaltaget.json";
 
 const Home = () => {
   return (
