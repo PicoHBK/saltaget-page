@@ -8,6 +8,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import FramerReorder from "./FramerReorder";
 import { motion } from "framer-motion"
 import lottieAnim from "../../assets/lottiemodsaltaget.json";
+import lottieAnimHero from "../../assets/logoherosaltaget.json";
 
 const Home = () => {
   return (
@@ -38,12 +39,16 @@ const Home = () => {
     >
         <Header />
         <section className="flex flex-col justify-between w-full items-center">
-          <div className="max-w-4xl flex flex-col">
-            <h1 className="text-5xl font-extrabold text-white font lg:text-8xl">
-              SALTAGET
-            </h1>
+          <div className="max-w-4xl flex flex-col px-3">
+          <Player
+              src={lottieAnimHero}
+              className="w-full h-full object-cover"
+              autoplay
+              keepLastFrame
+
+            ></Player>
             <h3 className="text-slate-400 font-semibold text-3xl">
-              Soluciones Innovadoras
+            Desarrollo y Soluciones Informáticas
             </h3>
             <p className="text-slate-200 font-bold">
               Desarrollamos software a medida, proporcionando tecnología
