@@ -12,9 +12,9 @@ import lottieAnimHero from "../../assets/logoherosaltaget.json";
 
 const Home = () => {
   return (
-    <section>
+    <section className="overflow-x-hidden">
       <motion.div
-       className="min-h-screen flex flex-col justify-between text-center"
+       className="min-h-screen flex flex-col justify-between text-center px-2 gap-5"
        initial={{
          background: "linear-gradient(30deg, #010223 30%, black)"  // Orientación inicial
        }}
@@ -38,8 +38,8 @@ const Home = () => {
        }}
     >
         <Header />
-        <section className="flex flex-col justify-between w-full items-center">
-          <div className="max-w-4xl flex flex-col px-3">
+        <section className="flex flex-col justify-center w-full items-center flex-grow">
+          <div className="max-w-4xl flex flex-col px-3 ">
           <Player
               src={lottieAnimHero}
               className="w-full h-full object-cover"
@@ -59,6 +59,10 @@ const Home = () => {
           
         </section>
         <FramerReorder />
+        <div className="flex lg:hidden w-full">
+          <img src="https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg" alt="img" className="w-full h-full object-contain" />
+
+        </div>
         </motion.div>
       <div
         id="servicios"
@@ -128,13 +132,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div id="nosotros" className="flex flex-col w-full bg-white py-10">
-        <h1 className="font-semibold text-gray-700 text-5xl text-center">
+      <div id="nosotros" className="flex flex-col w-full bg-white py-10 gap-4">
+        <h1 className="font-semibold text-gray-700 text-4xl lg:text-5xl text-center">
           Quienes Somos
         </h1>
         <div className="flex flex-col w-full lg:flex-row">
           <div className="flex flex-col w-full justify-center px-10">
-            <h2 className="text-4xl text-slate-400 font-bold text-center">
+            <h2 className="text-2xl lg:text-4xl text-slate-400 font-bold text-center">
               Creando el futuro del software
             </h2>
             <p className="text-lg text-slate-600 font-bold text-center">
