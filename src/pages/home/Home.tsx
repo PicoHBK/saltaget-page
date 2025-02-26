@@ -12,7 +12,7 @@ import lottieAnimHero from "../../assets/logoherosaltaget.json";
 
 const Home = () => {
   return (
-    <section className="overflow-x-hidden">
+    <section>
       <motion.div
        className="min-h-screen flex flex-col justify-between text-center px-2 gap-5"
        initial={{
