@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  ArrowRight,
   Badge,
   CheckCircle,
   ChevronDown,
@@ -12,7 +11,6 @@ import {
   Star,
   Zap,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 
@@ -271,13 +269,12 @@ const Home = () => {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                size="lg"
+              <a 
+                href="#form-contacto"
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-10 py-6 text-lg rounded-full shadow-lg shadow-cyan-500/25 border-0"
               >
                 Comenzar Proyecto
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              </a>
             </motion.div>
           </motion.div>
 

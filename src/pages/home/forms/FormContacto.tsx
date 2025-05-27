@@ -44,6 +44,7 @@ export const FormContacto = () => {
   return (
     <div className="mt-8 md:mt-12 bg-gradient-to-b from-white to-gray-50 text-gray-800 rounded-3xl md:rounded-4xl w-full md:w-11/12 lg:w-4/5 xl:w-2/3 mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
       <form
+      id="form-contacto"
         onSubmit={handleSubmit(onSubmit)}
         className="backdrop-blur-md rounded-xl p-4 sm:p-6 md:p-8 shadow-xl border border-gray-200 border-opacity-30"
       >
