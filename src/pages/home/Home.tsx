@@ -270,7 +270,7 @@ const Home = () => {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <a 
-                href="#form-contacto"
+                href="#contacto"
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-10 py-6 text-lg rounded-full shadow-lg shadow-cyan-500/25 border-0"
               >
                 Comenzar Proyecto
