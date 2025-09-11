@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 
 import logoSG from "../../assets/logo.png";
 import Contacto from "./Contacto";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -34,7 +35,7 @@ const Home = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white overflow-hidden relative">
+    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white overflow-hidden">
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {/* Flowing Lines Background */}
         <svg
@@ -189,6 +190,8 @@ const Home = () => {
                   </motion.a>
                 )
               )}
+
+              <Link to={"/chat"} className="text-gray-300 hover:text-cyan-400 transition-colors relative group font-bold"> CHAT IA</Link>
             </div>
           </div>
         </div>
@@ -268,14 +271,6 @@ const Home = () => {
             transition={{ delay: 1.4, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <a 
-                href="#contacto"
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-10 py-6 text-lg rounded-full shadow-lg shadow-cyan-500/25 border-0"
-              >
-                Comenzar Proyecto
-              </a>
-            </motion.div>
           </motion.div>
 
           {/* Estadísticas */}
