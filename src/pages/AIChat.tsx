@@ -20,6 +20,7 @@ import {
   ShoppingCart,
   ExternalLink,
 } from "lucide-react";
+import { AxiosError } from "axios";
 
 type FormData = {
   message: string;
@@ -181,8 +182,16 @@ const AIChat = () => {
       }
       reset();
     },
-    onError: (error) => {
+    onError: (error: AxiosError) => {
       console.error("Error:", error);
+      
+      // Verificar si el error es 429 (Too Many Requests)
+      let errorMessage = "Lo siento, solo soy un demo déjame descansar un poco o contratame para tener tu propio asistente.";
+      
+      if (error.response?.status === 429) {
+        errorMessage = "¡Uff! Estoy un poco cansado de tanto trabajar solo me contrataron para la demo. Me voy a descansar un ratito. Intenta preguntarme algo más tarde, ¿vale?";
+      }
+      
       // Eliminar el mensaje de carga y mostrar error
       setConversation((prev) => {
         const newConversation = prev.filter((msg) => msg.type !== "loading");
@@ -190,8 +199,7 @@ const AIChat = () => {
           ...newConversation,
           {
             type: "ai",
-            content:
-              "Lo siento, solo soy un demo déjame descansar un poco o contratame para tener tu propio asistente.",
+            content: errorMessage,
           },
         ];
         setTimeout(scrollToBottom, 150);
@@ -655,9 +663,9 @@ const AIChat = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
