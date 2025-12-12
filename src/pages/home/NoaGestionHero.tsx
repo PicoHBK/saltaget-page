@@ -32,9 +32,11 @@ export default function NoaGestionHero() {
             <div className="h-1 sm:h-1.5 w-20 sm:w-28 md:w-32 mx-auto rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 mb-4 sm:mb-6 shadow-2xl shadow-blue-500/60" />
 
             {/* Descripción */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-bold text-center">
-              El sistema definitivo para tu kiosco o tienda o emprendimiento. <span className="text-cyan-400">Gestión completa en minutos</span>
-            </p>
+           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-bold text-center">
+  El sistema ideal para tu kiosco, tienda o emprendimiento. 
+  <span className="text-cyan-400"> Gestión completa en minutos, sin complicaciones.</span>
+</p>
+
 
             {/* 3 Cards de beneficios */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-8 sm:mb-10 max-w-4xl mx-auto">
