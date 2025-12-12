@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import logoSG from "../../assets/logo.png";
 import Contacto from "./Contacto";
 import { Link } from "react-router-dom";
+import NoaGestionHero from "./NoaGestionHero";
 
 const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -196,6 +197,7 @@ const Home = () => {
           </div>
         </div>
       </motion.nav>
+      <NoaGestionHero />
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative pt-20">
         <motion.div
