@@ -1,13 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-      </style>
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SaltaGet</title>
+    <meta name="theme-color" content="#0f172a" />
+    <meta
+      name="description"
+      content="SaltaGet — Desarrollos y soluciones informáticas a medida: software, sitios web, e-commerce, integraciones y automatización."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>SaltaGet — Desarrollos y Soluciones Informáticas</title>
+
+    <script>
+      // Aplica el tema antes del primer paint para evitar el flash de color
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (
+            t === "dark" ||
+            (!t && window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

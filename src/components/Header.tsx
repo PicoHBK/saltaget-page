@@ -1,45 +1,40 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import logoSG from "@/assets/logo.png";
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  
-  // Verificar si estamos en la ruta principal
-  const isHomePage = location.pathname === "/";
+
+  // La home tiene su propia barra de navegación, evitamos el header duplicado
+  if (location.pathname === "/") return null;
 
   return (
-    <div className="flex mx-auto px-6 py-4 bg-blue-900">
-      <div className="flex items-center justify-between w-full">
-        <motion.div
-          className="flex items-center space-x-3 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400 }}
-          onClick={() => navigate("/")} // Redirigir a la página principal
-        >
-          <span className="text-2xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent">
-            SaltaGet
-          </span>
-        </motion.div>
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-xl dark:border-slate-800/70 dark:bg-slate-950/70">
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
 
-        {/* Mostrar elementos de navegación solo si NO estamos en la página de inicio */}
-        {!isHomePage && (
-          <div className="hidden md:flex space-x-8">
-            <motion.button
-              onClick={() => navigate('/chat')}
-              className="text-gray-300 hover:text-cyan-400 transition-colors relative group"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              whileHover={{ y: -2 }}
-            >
-              Chat IA
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300" />
-            </motion.button>
-          </div>
-        )}
+      <div className="container mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+        <button
+          onClick={() => navigate("/")}
+          className="group flex items-center gap-2.5 text-xl font-bold tracking-tight text-slate-900 dark:text-white"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 p-1.5 shadow-sm shadow-cyan-500/30">
+            <img src={logoSG} alt="SaltaGet" className="h-full w-full object-contain" />
+          </span>
+          Salta<span className="text-cyan-600 dark:text-cyan-400">Get</span>
+        </button>
+
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate("/")}
+            className="hidden text-sm font-medium text-slate-600 transition-colors hover:text-cyan-600 dark:text-slate-300 dark:hover:text-cyan-400 sm:inline-flex"
+          >
+            Volver al inicio
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
-    </div>
+    </header>
   );
 }
 

@@ -10,7 +10,7 @@ function FramerReorder() {
 
     return (
         <ul
-            className="hidden lg:flex flex-row justify-center items-end gap-3 max-w-[1440px]list-none cursor-pointer"
+            className="hidden lg:flex flex-row justify-center items-end gap-3 max-w-[1440px] list-none cursor-pointer"
             onClick={handleClick}
         >
             {order.map((backgroundColor) => (
@@ -57,7 +57,7 @@ function shuffle(array: string[]) {
  * ==============   Animations   ================
  */
 const spring = {
-    type: "spring",
+    type: "spring" as const,
     damping: 20,
     stiffness: 300,
 }

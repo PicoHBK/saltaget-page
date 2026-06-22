@@ -1,726 +1,496 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
-  Badge,
-  CheckCircle,
   ChevronDown,
-  Code,
+  Code2,
   Link2,
   Monitor,
   Network,
+  Rocket,
+  Search,
   ShoppingCart,
   Star,
   Zap,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 
 import logoSG from "../../assets/logo.png";
 import Contacto from "./Contacto";
-import { Link } from "react-router-dom";
-import NoaGestionHero from "./NoaGestionHero";
+import Productos from "./Productos";
+import ConfianEnNosotros from "./ConfianEnNosotros";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
+
+/* ============================================================
+ * Datos
+ * ========================================================== */
+
+const NAV_LINKS = [
+  { label: "Productos", href: "#productos" },
+  { label: "Nosotros", href: "#nosotros" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+
+const VALUES = [
+  "Comunicación cercana y trato personalizado",
+  "Soluciones a medida, adaptadas a cada necesidad",
+  "Compromiso real con cada proyecto",
+  "Acompañamiento y soporte post-entrega",
+];
+
+const SERVICES: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Monitor,
+    title: "Desarrollo Web",
+    description:
+      "Sitios y aplicaciones web a medida, optimizados para rendimiento y escalabilidad.",
+  },
+  {
+    icon: Code2,
+    title: "Software a Medida",
+    description:
+      "Soluciones personalizadas para mejorar los procesos y resultados de tu negocio.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-commerce",
+    description:
+      "Tiendas online con pasarelas de pago seguras, enfocadas en la conversión.",
+  },
+  {
+    icon: Link2,
+    title: "Integraciones API",
+    description:
+      "Conectamos tu plataforma con otros servicios y sistemas externos.",
+  },
+  {
+    icon: Zap,
+    title: "Automatización",
+    description:
+      "Optimizamos tareas repetitivas para mejorar la eficiencia operativa.",
+  },
+  {
+    icon: Network,
+    title: "Redes y Telecom.",
+    description:
+      "Diseño, instalación y mantenimiento de redes de datos y telecomunicaciones.",
+  },
+];
+
+const PROCESS: { step: string; title: string; description: string; icon: LucideIcon }[] = [
+  { step: "01", title: "Análisis", description: "Entendemos tus necesidades y objetivos.", icon: Search },
+  { step: "02", title: "Diseño", description: "Creamos prototipos y arquitectura.", icon: Code2 },
+  { step: "03", title: "Desarrollo", description: "Construimos tu solución con calidad.", icon: Zap },
+  { step: "04", title: "Entrega", description: "Implementamos y brindamos soporte.", icon: Rocket },
+];
+
+const TESTIMONIALS = [
+  {
+    name: "Cecilia Roldán",
+    company: "SIJAC Consultora Legal",
+    testimonial:
+      "Gracias al sistema de turnos y gestión que desarrollaron para nuestra consultora, ahora podemos organizarnos mejor y brindar una atención más ágil y eficiente.",
+    avatar: "CR",
+  },
+  {
+    name: "Georgina Lemos",
+    company: "Fundación Convivir",
+    testimonial:
+      "El equipo entendió perfectamente la esencia de nuestra fundación. La nueva página nos permite llegar a más personas y mostrar de forma clara nuestra misión.",
+    avatar: "GL",
+  },
+  {
+    name: "Pablo Macedo",
+    company: "Lubricar y Car premium",
+    testimonial:
+      "El sistema que nos desarrollaron simplificó por completo la gestión del taller y el lavadero. Ahora controlamos todo desde un solo lugar.",
+    avatar: "PM",
+  },
+];
+
+/* ============================================================
+ * Helpers de animación
+ * ========================================================== */
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+};
+
+const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+  <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+    {children}
+  </span>
+);
+
+/* ============================================================
+ * Página
+ * ========================================================== */
 
 const Home = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, -100]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -50]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: ((e.clientX / window.innerWidth) * 2 - 1),
-        y: ((e.clientY / window.innerHeight) * 2 - 1),
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
   return (
-    <section className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white overflow-hidden">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Flowing Lines Background */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          viewBox="0 0 1200 800"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <linearGradient
-              id="flowGradient1"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="rgba(0, 255, 255, 0.3)" />
-              <stop offset="50%" stopColor="rgba(59, 130, 246, 0.2)" />
-              <stop offset="100%" stopColor="rgba(147, 51, 234, 0.1)" />
-            </linearGradient>
-            <linearGradient
-              id="flowGradient2"
-              x1="100%"
-              y1="0%"
-              x2="0%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="rgba(59, 130, 246, 0.3)" />
-              <stop offset="50%" stopColor="rgba(147, 51, 234, 0.2)" />
-              <stop offset="100%" stopColor="rgba(0, 255, 255, 0.1)" />
-            </linearGradient>
-          </defs>
+    <div className="min-h-screen text-slate-900 dark:text-slate-100 selection:bg-cyan-500/20">
+      <AnimatedBackground />
 
-          <motion.path
-            d="M0,400 Q300,200 600,300 T1200,250"
-            stroke="url(#flowGradient1)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          />
+      {/* ---------- Navegación ---------- */}
+      <header className="fixed top-0 z-50 w-full border-b border-slate-200/70 bg-white/70 backdrop-blur-xl dark:border-slate-800/70 dark:bg-slate-950/70">
+        {/* Hairline gradiente */}
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
 
-          <motion.path
-            d="M0,300 Q400,100 800,200 T1200,150"
-            stroke="url(#flowGradient2)"
-            strokeWidth="3"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }}
-          />
-
-          <motion.path
-            d="M0,500 Q200,300 500,400 T1200,350"
-            stroke="rgba(0, 255, 255, 0.2)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 3, delay: 1, ease: "easeInOut" }}
-          />
-
-          {/* Multiple flowing lines for depth */}
-          {[...Array(8)].map((_, i) => (
-            <motion.path
-              key={i}
-              d={`M0,${200 + i * 50} Q${300 + i * 100},${100 + i * 30} ${
-                600 + i * 50
-              },${250 + i * 20} T1200,${200 + i * 25}`}
-              stroke={`rgba(${59 + i * 20}, ${130 + i * 15}, 246, ${
-                0.1 + i * 0.02
-              })`}
-              strokeWidth={1 + i * 0.2}
-              fill="none"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{
-                duration: 4 + i * 0.5,
-                delay: i * 0.2,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </svg>
-
-        {/* Animated Particles */}
-        {[...Array(30)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -50, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-
-        {/* Mouse-following gradient orb */}
-        <motion.div
-          className="absolute w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
-          style={{
-            left: `${50 + mousePosition.x * 10}%`,
-            top: `${50 + mousePosition.y * 10}%`,
-            transform: "translate(-50%, -50%)",
-          }}
-          transition={{ type: "spring", stiffness: 50, damping: 30 }}
-        />
-      </div>
-      {/* Navigation */}
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="fixed top-0 w-full z-50 bg-slate-900/20 backdrop-blur-xl border-b border-cyan-500/20"
-      >
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <motion.div
-              className="flex items-center space-x-3"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <span className="text-2xl font-bold bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent">
-                SaltaGet
-              </span>
-            </motion.div>
-
-            <div className="hidden md:flex space-x-8">
-              {["Inicio","Nosotros" ,"Servicios","Contacto"].map(
-                (item, index) => (
-                  <motion.a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-300 hover:text-cyan-400 transition-colors relative group"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    whileHover={{ y: -2 }}
-                  >
-                    {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300" />
-                  </motion.a>
-                )
-              )}
-
-              <Link to={"/chat"} className="text-gray-300 hover:text-cyan-400 transition-colors relative group font-bold"> CHAT IA</Link>
-            </div>
-          </div>
-        </div>
-      </motion.nav>
-      <NoaGestionHero />
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative pt-20">
-        <motion.div
-          style={{ y: y1 }}
-          className="text-center z-10 max-w-5xl mx-auto px-6"
-        >
-          {/* Logo Principal */}
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 200,
-              damping: 20,
-              duration: 1.5,
-            }}
-            className="mb-8"
+        <nav className="container mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+          <a
+            href="#inicio"
+            className="group flex items-center gap-2.5 text-xl font-bold tracking-tight"
           >
-            <div className="flex justify-center">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 p-1.5 shadow-sm shadow-cyan-500/30 transition-transform group-hover:scale-105">
               <img
                 src={logoSG}
-                alt="SaltaGet Logo"
-                className="w-50 h-50 object-contain"
+                alt="SaltaGet"
+                className="h-full w-full object-contain"
+              />
+            </span>
+            Salta
+            <span className="text-cyan-600 dark:text-cyan-400">Get</span>
+          </a>
+
+          <div className="flex items-center gap-2 md:gap-6">
+            <div className="hidden items-center gap-7 md:flex">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="group relative text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300 group-hover:w-full" />
+                </a>
+              ))}
+            </div>
+
+            <div className="mx-1 hidden h-5 w-px bg-slate-200 dark:bg-slate-800 md:block" />
+
+            <a
+              href="#contacto"
+              className="hidden rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cyan-600 dark:bg-white dark:text-slate-900 dark:hover:bg-cyan-400 sm:inline-flex"
+            >
+              Contactanos
+            </a>
+            <ThemeToggle />
+          </div>
+        </nav>
+      </header>
+
+      {/* ---------- Hero ---------- */}
+      <section
+        id="inicio"
+        className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24"
+      >
+        <div className="mx-auto max-w-3xl text-center">
+          {/* Logo en badge de marca (visible en ambos temas) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="relative mx-auto mb-7 w-fit"
+          >
+            <div className="absolute inset-0 -z-10 rounded-3xl bg-cyan-500/40 blur-2xl" />
+            <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 p-4 shadow-lg shadow-cyan-500/30 sm:h-28 sm:w-28">
+              <img
+                src={logoSG}
+                alt="SaltaGet"
+                className="h-full w-full object-contain"
               />
             </div>
           </motion.div>
 
-          {/* Título Principal */}
+          {/* Marca principal */}
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-6xl md:text-8xl font-bold mb-6"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-display text-6xl font-bold uppercase leading-none tracking-tight sm:text-7xl md:text-8xl lg:text-9xl"
           >
-            <motion.span
-              className="bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY }}
-              style={{ backgroundSize: "200% auto" }}
-            >
-              SaltaGet
-            </motion.span>
+            Salta
+            <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent dark:from-cyan-400 dark:to-blue-400">
+              Get
+            </span>
           </motion.h1>
 
-          {/* Subtítulo */}
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-2xl md:text-4xl font-semibold mb-8 text-cyan-300"
-          >
-            Desarrollos y Soluciones Informáticas
-          </motion.h2>
-
-          {/* Descripción */}
+          {/* Propuesta de valor */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto"
+            transition={{ duration: 0.6, delay: 0.18 }}
+            className="mx-auto mt-5 max-w-2xl text-balance text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-200 sm:text-3xl"
+          >
+            Construimos el software que tu{" "}
+            <span className="text-cyan-600 dark:text-cyan-400">
+              empresa necesita
+            </span>
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-slate-600 dark:text-slate-400 sm:text-xl"
           >
             Transformamos ideas en soluciones digitales innovadoras.
             Desarrollamos software a medida con tecnología de vanguardia para
             impulsar el crecimiento de tu empresa.
           </motion.p>
 
-          {/* Botones CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
-          >
-          </motion.div>
-
-          {/* Estadísticas */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.7, duration: 0.8 }}
-            className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-16"
-          >
-            {[
-              { number: "10+", label: "Proyectos" },
-              { number: "100%", label: "Satisfacción" },
-              { number: "3+", label: "Años" },
-            ].map((stat) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                whileHover={{ y: -5, scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-300 text-sm uppercase tracking-wider">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            className="flex flex-col items-center text-cyan-400"
-          >
-            <ChevronDown className="w-6 h-6" />
-          </motion.div>
-        </motion.div>
-      </section>
-      {/* About Section - WHITE BACKGROUND */}
-      <section
-        id="nosotros"
-        className="py-32 bg-gradient-to-b from-white to-gray-50 text-gray-900"
-      >
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,#06b6d4_1px,transparent_1px),linear-gradient(-45deg,#06b6d4_1px,transparent_1px)] bg-[size:20px_20px]" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
+        <motion.a
+          href="#productos"
+          aria-label="Desplazarse hacia abajo"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="group absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-slate-400 transition-colors hover:text-cyan-600 dark:text-slate-500 dark:hover:text-cyan-400"
+        >
+          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.2em]">
+            Descubrí más
+          </span>
+          <motion.span
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
           >
+            <ChevronDown className="h-5 w-5" />
+          </motion.span>
+        </motion.a>
+      </section>
 
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              Innovación y Experiencia
+      {/* ---------- Confían en nosotros ---------- */}
+      <ConfianEnNosotros />
+
+      {/* ---------- Nuestros Productos ---------- */}
+      <Productos />
+
+      {/* ---------- Nosotros ---------- */}
+      <section
+        id="nosotros"
+        className="border-y border-slate-200/70 bg-slate-50/70 py-24 backdrop-blur-sm dark:border-slate-800/70 dark:bg-slate-900/50 sm:py-32"
+      >
+        <div className="container mx-auto max-w-6xl px-6">
+          <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Nosotros</Eyebrow>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+              Innovación y experiencia
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Somos un equipo apasionado por la tecnología, comprometidos con
-              transformar ideas en soluciones digitales exitosas
+            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+              Un equipo apasionado por la tecnología, comprometido con
+              transformar ideas en soluciones digitales exitosas.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-3xl font-bold mb-6 text-gray-900">
+          <div className="mt-16 grid items-start gap-12 lg:grid-cols-2">
+            <motion.div {...fadeUp}>
+              <h3 className="text-2xl font-semibold tracking-tight">
                 Creciendo con cada proyecto
               </h3>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="mt-4 leading-relaxed text-slate-600 dark:text-slate-400">
                 Somos un equipo joven de desarrolladores y profesionales de
                 tecnología con base en Salta, apasionados por crear soluciones
                 digitales que marquen la diferencia. Apostamos al trabajo bien
                 hecho, la mejora continua y la cercanía con cada cliente.
               </p>
 
-              <div className="space-y-4">
-                {[
-                  "Comunicación cercana y trato personalizado",
-                  "Soluciones a medida, adaptadas a cada necesidad",
-                  "Compromiso real con cada proyecto",
-                  "Acompañamiento y soporte post-entrega",
-                ].map((feature, index) => (
-                  <motion.div
-                    key={feature}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-3"
-                  >
-                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </motion.div>
+              <ul className="mt-8 space-y-4">
+                {VALUES.map((value) => (
+                  <li key={value} className="flex items-start gap-3">
+                    <span className="mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                      <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+                        <path
+                          d="M2.5 6.5l2.5 2.5 4.5-5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <span className="text-slate-700 dark:text-slate-300">
+                      {value}
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
 
-            {/* Stats Cards */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
-            >
+            <motion.div {...fadeUp} className="grid grid-cols-2 gap-4">
               {[
-                { number: "10+", label: "Proyectos", icon: "🚀" },
-                { number: "100%", label: "Satisfacción Cliente", icon: "⭐" },
-                { number: "24/7", label: "Soporte Técnico", icon: "🛠️" },
-                { number: "3+", label: "Años Experiencia", icon: "📈" },
+                { number: "10+", label: "Proyectos" },
+                { number: "100%", label: "Satisfacción cliente" },
+                { number: "24/7", label: "Soporte técnico" },
+                { number: "3+", label: "Años de experiencia" },
               ].map((stat) => (
-                <motion.div
+                <div
                   key={stat.label}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900"
                 >
-                  <Card className="bg-gradient-to-br from-gray-50 to-white border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
-                    <CardContent className="p-6 text-center">
-                      <div className="text-3xl mb-3">{stat.icon}</div>
-                      <div className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
-                        {stat.number}
-                      </div>
-                      <div className="text-sm text-gray-600 font-medium">
-                        {stat.label}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">
+                    {stat.number}
+                  </div>
+                  <div className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {stat.label}
+                  </div>
+                </div>
               ))}
             </motion.div>
           </div>
         </div>
       </section>
-      {/* Services Section */}
-      <section id="servicios" className="py-32 relative">
-        <motion.div style={{ y: y2 }} className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 px-4 py-2 text-sm mb-6">
-              Nuestros Servicios
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-              Soluciones Tecnológicas
+
+      {/* ---------- Servicios ---------- */}
+      <section id="servicios" className="py-24 sm:py-32">
+        <div className="container mx-auto max-w-6xl px-6">
+          <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Servicios</Eyebrow>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+              Soluciones tecnológicas
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Ofrecemos un amplio rango de servicios para cubrir todas tus
-              necesidades tecnológicas
+            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+              Un amplio rango de servicios para cubrir todas tus necesidades
+              tecnológicas.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Monitor,
-                title: "Desarrollo Web",
-                description:
-                  "Desarrollo de sitios y aplicaciones web adaptados a tus necesidades, optimizados para rendimiento y escalabilidad",
-                gradient: "from-cyan-500 to-blue-600",
-              },
-              {
-                icon: Code,
-                title: "Desarrollo de Software a Medida",
-                description:
-                  "Creamos soluciones personalizadas, adaptadas a las necesidades específicas de tu negocio para mejorar procesos y resultados",
-                gradient: "from-blue-500 to-indigo-600",
-              },
-              {
-                icon: ShoppingCart,
-                title: "E-commerce",
-                description:
-                  "Desarrollo de tiendas online con pasarelas de pago seguras, enfocadas en la conversión y la experiencia de compra",
-                gradient: "from-pink-500 to-red-500",
-              },
-              {
-                icon: Link2,
-                title: "Integraciones API",
-                description:
-                  "Conectamos tu plataforma con otros servicios y sistemas externos para mejorar su funcionalidad y alcance",
-                gradient: "from-purple-500 to-blue-600",
-              },
-              {
-                icon: Zap,
-                title: "Automatización de Procesos",
-                description:
-                  "Desarrollamos soluciones que optimizan tareas repetitivas, mejorando la eficiencia operativa de tu negocio",
-                gradient: "from-yellow-500 to-orange-600",
-              },
-              {
-                icon: Network, // Reemplazalo por el ícono que uses en tu librería (ej. 'Wifi' o 'Server')
-                title: "Redes de Telecomunicaciones",
-                description:
-                  "Diseño, instalación y mantenimiento de redes de datos y telecomunicaciones para una conectividad eficiente y segura",
-                gradient: "from-green-500 to-blue-500",
-              },
-            ].map((service, index) => (
+          <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 dark:border-slate-800 dark:bg-slate-800 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service, i) => (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group"
+                transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
+                className="group bg-white p-8 transition-colors hover:bg-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900"
               >
-                <Card className="bg-slate-800/30 border-cyan-500/20 backdrop-blur-xl hover:bg-slate-800/50 hover:border-cyan-400/40 transition-all duration-500 h-full">
-                  <CardContent className="p-8">
-                    <motion.div
-                      className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <service.icon className="w-7 h-7 text-white" />
-                    </motion.div>
-                    <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 transition-colors group-hover:bg-cyan-600 group-hover:text-white dark:text-cyan-400 dark:group-hover:bg-cyan-400 dark:group-hover:text-slate-900">
+                  <service.icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold">{service.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  {service.description}
+                </p>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </section>
-      {/* Process Section - WHITE BACKGROUND */}
-      <section className="py-32 bg-gradient-to-b from-white to-gray-50 text-gray-900">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <Badge className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 px-4 py-2 text-sm mb-6">
-              Nuestro Proceso
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-              Cómo Trabajamos
+
+      {/* ---------- Proceso ---------- */}
+      <section
+        id="proceso"
+        className="border-y border-slate-200/70 bg-slate-50/70 py-24 backdrop-blur-sm dark:border-slate-800/70 dark:bg-slate-900/50 sm:py-32"
+      >
+        <div className="container mx-auto max-w-6xl px-6">
+          <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Proceso</Eyebrow>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+              Cómo trabajamos
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
               Un proceso estructurado y transparente que garantiza resultados
-              excepcionales
+              excepcionales.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Análisis",
-                description: "Entendemos tus necesidades y objetivos",
-                icon: "🔍",
-                color: "from-blue-500 to-cyan-500",
-              },
-              {
-                step: "02",
-                title: "Diseño",
-                description: "Creamos prototipos y arquitectura",
-                icon: "🎨",
-                color: "from-purple-500 to-blue-500",
-              },
-              {
-                step: "03",
-                title: "Desarrollo",
-                description: "Construimos tu solución con calidad",
-                icon: "⚡",
-                color: "from-green-500 to-teal-500",
-              },
-              {
-                step: "04",
-                title: "Entrega",
-                description: "Implementamos y brindamos soporte",
-                icon: "🚀",
-                color: "from-orange-500 to-red-500",
-              },
-            ].map((process, index) => (
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {PROCESS.map((process, i) => (
               <motion.div
                 key={process.step}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
                 className="relative"
               >
-                {/* Connection Line */}
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-gray-300 to-transparent z-0" />
-                )}
-
-                <motion.div
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="relative z-10"
-                >
-                  <Card className="bg-white border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                    <CardContent className="p-8 text-center">
-                      <div className="text-4xl mb-4">{process.icon}</div>
-                      <div
-                        className={`text-sm font-bold bg-gradient-to-r ${process.color} bg-clip-text text-transparent mb-3`}
-                      >
-                        PASO {process.step}
-                      </div>
-                      <h3 className="text-2xl font-bold mb-4 text-gray-900">
-                        {process.title}
-                      </h3>
-                      <p className="text-gray-600 leading-relaxed">
-                        {process.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                <span className="text-sm font-bold text-cyan-600 dark:text-cyan-400">
+                  {process.step}
+                </span>
+                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200">
+                  <process.icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold">{process.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                  {process.description}
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-      {/* Testimonials Section - WHITE BACKGROUND */}
-      <section className="py-32 bg-white text-gray-900">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <Badge className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-0 px-4 py-2 text-sm mb-6">
-              Testimonios
-            </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+
+      {/* ---------- Testimonios ---------- */}
+      <section className="py-24 sm:py-32">
+        <div className="container mx-auto max-w-6xl px-6">
+          <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
+            <Eyebrow>Testimonios</Eyebrow>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
               Lo que dicen nuestros clientes
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              La satisfacción de nuestros clientes es nuestra mayor recompensa
+            <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+              La satisfacción de nuestros clientes es nuestra mayor recompensa.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Cecilia Roldán",
-                company: "SIJAC Consultora Legal",
-                testimonial:
-                  "Gracias al sistema de turnos y gestión que desarrollaron para nuestra consultora, ahora podemos organizarnos mejor y brindar una atención más ágil y eficiente a nuestros clientes.",
-                rating: 5,
-                avatar: "CR",
-              },
-              {
-                name: "Georgina Lemos",
-                company: "Fundación Convivir",
-                testimonial:
-                  "El equipo entendió perfectamente la esencia de nuestra fundación. La nueva página nos permite llegar a más personas y mostrar de forma clara nuestra misión y actividades.",
-                rating: 5,
-                avatar: "GL",
-              },
-              {
-                name: "Pablo Macedo",
-                company: "Lubricar y Car premium",
-                testimonial:
-                  "El sistema que nos desarrollaron simplificó por completo la gestión del taller y el lavadero. Ahora controlamos todo desde un solo lugar: stock, personal, caja y más.",
-                rating: 5,
-                avatar: "PM",
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={testimonial.name}
-                initial={{ opacity: 0, y: 50 }}
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {TESTIMONIALS.map((t, i) => (
+              <motion.figure
+                key={t.name}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="group"
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 dark:border-slate-800 dark:bg-slate-900"
               >
-                <Card className="bg-gradient-to-br from-gray-50 to-white border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 h-full">
-                  <CardContent className="p-8">
-                    {/* Stars */}
-                    <div className="flex justify-center mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
-                        />
-                      ))}
-                    </div>
-
-                    {/* Testimonial */}
-                    <p className="text-gray-700 leading-relaxed mb-6 italic">
-                      "{testimonial.testimonial}"
-                    </p>
-
-                    {/* Author */}
-                    <div className="flex items-center justify-center">
-                      <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                        {testimonial.avatar}
-                      </div>
-                      <div className="text-left">
-                        <div className="font-semibold text-gray-900">
-                          {testimonial.name}
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          {testimonial.company}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                <div className="flex gap-0.5 text-cyan-500 dark:text-cyan-400">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <blockquote className="mt-4 flex-1 leading-relaxed text-slate-700 dark:text-slate-300">
+                  “{t.testimonial}”
+                </blockquote>
+                <figcaption className="mt-6 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-sm font-bold text-white">
+                    {t.avatar}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold">{t.name}</span>
+                    <span className="block text-xs text-slate-500 dark:text-slate-400">
+                      {t.company}
+                    </span>
+                  </span>
+                </figcaption>
+              </motion.figure>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* ---------- Contacto ---------- */}
       <Contacto />
 
-      <footer className="h-20 flex w-full bg-gradient-to-r from-blue-950 to-black justify-center items-center">
-        <p className="text-white font-semibold">
-          <span className="font-bold text-slate-400">SaltaGet©</span> Todos los
-          derechos reservados.
-        </p>
+      {/* ---------- Footer ---------- */}
+      <footer className="border-t border-slate-200 py-10 dark:border-slate-800">
+        <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-500 dark:text-slate-400 sm:flex-row">
+          <span>
+            <span className="font-semibold text-slate-900 dark:text-white">
+              SaltaGet
+            </span>{" "}
+            © {new Date().getFullYear()} — Todos los derechos reservados.
+          </span>
+          <span>Salta, Argentina</span>
+        </div>
       </footer>
-    </section>
+    </div>
   );
 };
 

@@ -262,17 +262,17 @@ const AIChat = () => {
                 }`}
               />
             ))}
-            <span className="text-gray-600 text-xs ml-1">({rating})</span>
+            <span className="text-gray-600 dark:text-slate-400 text-xs ml-1">({rating})</span>
           </div>
         );
       }
 
       // Si no es reconocible, mostrar el texto original
-      return <span className="text-gray-600 text-xs">{ratingString}</span>;
+      return <span className="text-gray-600 dark:text-slate-400 text-xs">{ratingString}</span>;
     };
 
     return (
-      <div className="bg-white rounded-lg border border-gray-200 p-3 shadow-sm mb-2">
+      <div className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-3 shadow-sm mb-2">
         <div className="flex items-start gap-2">
           <div className="bg-indigo-100 p-1.5 rounded-lg flex-shrink-0">
             <ShoppingBag className="w-4 h-4 text-indigo-600" />
@@ -310,10 +310,10 @@ const AIChat = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl mx-auto">
         {/* Header mejorado */}
-        <div className="text-center mb-10 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-indigo-100">
+        <div className="text-center mb-10 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-indigo-100 dark:border-slate-700">
           <div className="inline-flex items-center gap-4 mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-full">
             <div className="relative">
               <Bot className="w-10 h-10" />
@@ -323,7 +323,7 @@ const AIChat = () => {
               Asistente Virtual Inteligente SaltaGet
             </h1>
           </div>
-          <p className="text-gray-700 text-lg mb-2">
+          <p className="text-gray-700 dark:text-slate-300 text-lg mb-2">
             Conoce nuestros productos y servicios
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -360,9 +360,9 @@ const AIChat = () => {
         </div>
 
         {/* Conversation Display mejorado */}
-        <section className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-indigo-100">
+        <section className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-indigo-100 dark:border-slate-700">
           {conversation.length > 0 ? (
-            <div className="mb-6 bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
+            <div className="mb-6 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-xl overflow-hidden">
               <div className="bg-indigo-600 text-white p-4 flex items-center gap-3">
                 <MessagesSquare className="w-5 h-5" />
                 <span className="font-medium">Conversación en tiempo real</span>
@@ -386,7 +386,7 @@ const AIChat = () => {
                             ? "bg-indigo-100 border-indigo-200"
                             : msg.type === "loading"
                             ? "bg-transparent border-transparent"
-                            : "bg-white border-gray-200 shadow-xs"
+                            : "bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 shadow-xs"
                         }`}
                       >
                         <div className="flex items-start gap-3">
@@ -419,7 +419,7 @@ const AIChat = () => {
                             </div>
                           ) : (
                             <div className="flex-1">
-                              <p className="text-gray-800 leading-relaxed">
+                              <p className="text-gray-800 dark:text-slate-100 leading-relaxed">
                                 {msg.content}
                               </p>
                             </div>
@@ -430,8 +430,8 @@ const AIChat = () => {
                     {/* Productos recomendados debajo del mensaje de IA */}
                     {msg.type === "ai" && msg.data && msg.data.length > 0 && (
                       <div className="ml-12 mt-1">
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl border border-indigo-100 flex flex-col">
-                          <h4 className="font-medium text-gray-700 mb-3 flex items-center gap-2">
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl border border-indigo-100 dark:border-slate-700 flex flex-col">
+                          <h4 className="font-medium text-gray-700 dark:text-slate-300 mb-3 flex items-center gap-2">
                             <ShoppingBag className="w-4 h-4 text-indigo-600" />
                             Productos recomendados
                           </h4>
@@ -452,34 +452,34 @@ const AIChat = () => {
           ) : (
             // Mensaje publicitario cuando no hay conversación
             <div className="mb-6 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl border border-indigo-200 shadow-xl overflow-hidden p-8 text-center">
-              <div className="bg-white/80 p-6 rounded-xl border border-indigo-100">
+              <div className="bg-white/80 p-6 rounded-xl border border-indigo-100 dark:border-slate-700">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-indigo-600 rounded-full mb-4">
                   <Sparkles className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-indigo-800 mb-2">
                   ¡Descubre el poder de la IA en tu negocio!
                 </h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-gray-700 dark:text-slate-300 mb-4">
                   Nuestro asistente virtual puede ayudarte a encontrar
                   productos, responder preguntas y ofrecerte recomendaciones
                   personalizadas las 24 horas del día, los 7 días de la semana.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-white p-4 rounded-lg border border-indigo-100">
+                  <div className="bg-white p-4 rounded-lg border border-indigo-100 dark:border-slate-700">
                     <Clock className="w-6 h-6 text-indigo-600 mx-auto mb-2" />
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-800 dark:text-slate-100">
                       Respuestas instantáneas
                     </p>
                   </div>
-                  <div className="bg-white p-4 rounded-lg border border-indigo-100">
+                  <div className="bg-white p-4 rounded-lg border border-indigo-100 dark:border-slate-700">
                     <TrendingUp className="w-6 h-6 text-indigo-600 mx-auto mb-2" />
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-800 dark:text-slate-100">
                       Recomendaciones inteligentes
                     </p>
                   </div>
-                  <div className="bg-white p-4 rounded-lg border border-indigo-100">
+                  <div className="bg-white p-4 rounded-lg border border-indigo-100 dark:border-slate-700">
                     <ShoppingBag className="w-6 h-6 text-indigo-600 mx-auto mb-2" />
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-sm font-medium text-gray-800 dark:text-slate-100">
                       Productos personalizados
                     </p>
                   </div>
@@ -491,7 +491,7 @@ const AIChat = () => {
             </div>
           )}
           {/* Chat Input mejorado */}
-          <div className="bg-blue-100 rounded-2xl border border-gray-200 shadow-xl p-6 mb-8">
+          <div className="bg-blue-100 dark:bg-slate-800 rounded-2xl border border-gray-200 dark:border-slate-700 shadow-xl p-6 mb-8">
             <div className="flex items-center gap-2 mb-4 text-indigo-700">
               <Lightbulb className="w-5 h-5" />
               <p className="text-sm">
@@ -511,7 +511,7 @@ const AIChat = () => {
                     },
                   })}
                   placeholder="Escribe tu consulta aquí..."
-                  className="w-full px-5 py-4 pr-20 text-lg bg-indigo-50 border border-indigo-200 rounded-xl focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200 shadow-inner"
+                  className="w-full px-5 py-4 pr-20 text-lg bg-indigo-50 dark:bg-slate-900 dark:text-slate-100 border border-indigo-200 dark:border-slate-600 rounded-xl focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 transition-all duration-200 shadow-inner"
                   maxLength={150}
                   disabled={mutation.isPending}
                 />
@@ -555,55 +555,55 @@ const AIChat = () => {
         </section>
 
         {/* Value Proposition Section */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-indigo-100 shadow-lg mb-10">
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl p-8 border border-indigo-100 dark:border-slate-700 shadow-lg mb-10">
+          <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-slate-100 mb-6">
             ¿Por qué implementar nuestro asistente IA?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <Clock className="w-6 h-6 text-indigo-600" />
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-gray-800 dark:text-slate-100">
                   Disponibilidad 24/7
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 text-sm">
                 Atiende a tus clientes en cualquier momento sin limitaciones de
                 horario.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <TrendingUp className="w-6 h-6 text-indigo-600" />
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-gray-800 dark:text-slate-100">
                   Aumenta tus ventas
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 text-sm">
                 Recomienda productos relevantes y aumenta el valor promedio de
                 compra.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <Users className="w-6 h-6 text-indigo-600" />
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-gray-800 dark:text-slate-100">
                   Mejora la experiencia
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 text-sm">
                 Ofrece respuestas instantáneas y personalizadas a cada cliente.
               </p>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100">
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-indigo-100 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <DollarSign className="w-6 h-6 text-indigo-600" />
-                <h3 className="font-semibold text-gray-800">Reduce costos</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-slate-100">Reduce costos</h3>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-slate-400 text-sm">
                 Disminuye la carga de trabajo de tu equipo de atención al
                 cliente.
               </p>
@@ -613,34 +613,34 @@ const AIChat = () => {
 
         {/* Features Section mejorada */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
-          <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl border border-indigo-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
               <Sparkles className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="font-semibold text-gray-800 mb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 mb-2">
               Respuestas Inteligentes
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-slate-400">
               IA entrenada con el conocimiento de tu negocio
             </p>
           </div>
-          <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl border border-indigo-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
               <Bot className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="font-semibold text-gray-800 mb-2">IA Avanzada</h3>
-            <p className="text-sm text-gray-600">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 mb-2">IA Avanzada</h3>
+            <p className="text-sm text-gray-600 dark:text-slate-400">
               Tecnología de última generación para tu negocio
             </p>
           </div>
-          <div className="p-5 bg-white/80 backdrop-blur-sm rounded-xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+          <div className="p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-xl border border-indigo-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
             <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
               <Send className="w-6 h-6 text-indigo-600" />
             </div>
-            <h3 className="font-semibold text-gray-800 mb-2">
+            <h3 className="font-semibold text-gray-800 dark:text-slate-100 mb-2">
               Respuesta Rápida
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-slate-400">
               Resuelve consultas en segundos, no en horas
             </p>
           </div>
@@ -648,7 +648,7 @@ const AIChat = () => {
 
         {/* Footer Call-to-Action */}
         <div className="text-center mt-10 pt-6 border-t border-indigo-100">
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 dark:text-slate-400 mb-4">
             ¿Interesado en implementar esta solución en tu negocio?
           </p>
           <a

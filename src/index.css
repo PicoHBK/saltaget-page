@@ -2,24 +2,149 @@
 
 @plugin "tailwindcss-animate";
 
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --radius: 0.6rem;
+  --radius: 0.6rem;
+
+  /* Paleta de marca SaltaGet */
+  --brand-cyan: #06b6d4;
+  --brand-blue: #2563eb;
+  --brand-indigo: #4f46e5;
+  --brand-purple: #7c3aed;
+
+  /* Superficies base (tema oscuro del hero) */
+  --surface-950: #020617;
+  --surface-900: #0f172a;
+  --surface-800: #1e293b;
 }
 
 @theme inline {
-    --radius-sm: calc(var(--radius) - 4px);
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Exponemos la marca como utilidades Tailwind: bg-brand-cyan, text-brand-blue, etc. */
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-indigo: var(--brand-indigo);
+  --color-brand-purple: var(--brand-purple);
 }
 
 @theme {
-  --font-primary: "Manrope", "serif";
+  --font-primary: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Manrope", ui-sans-serif, sans-serif;
 }
 
 html {
   @apply scroll-smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  @apply font-primary bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===== Fondo animado (AnimatedBackground) ===== */
+.bg-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  will-change: transform;
+}
+
+.bg-blob--1 {
+  top: -10%;
+  left: -5%;
+  width: 38rem;
+  height: 38rem;
+  animation: blob-drift-1 26s ease-in-out infinite;
+}
+
+.bg-blob--2 {
+  top: 30%;
+  right: -10%;
+  width: 34rem;
+  height: 34rem;
+  animation: blob-drift-2 32s ease-in-out infinite;
+}
+
+.bg-blob--3 {
+  bottom: -15%;
+  left: 25%;
+  width: 30rem;
+  height: 30rem;
+  animation: blob-drift-3 38s ease-in-out infinite;
+}
+
+@keyframes blob-drift-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(8%, 12%, 0) scale(1.15);
+  }
+}
+
+@keyframes blob-drift-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-10%, 8%, 0) scale(1.1);
+  }
+}
+
+@keyframes blob-drift-3 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -10%, 0) scale(1.2);
+  }
+}
+
+@keyframes wave-flow {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+/* Carrusel de logos "Confían en nosotros" */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-blob,
+  use,
+  .animate-marquee {
+    animation: none !important;
+  }
 }

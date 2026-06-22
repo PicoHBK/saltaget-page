@@ -1,86 +1,61 @@
-import { motion } from 'framer-motion'
-import { Mail, MapPin, Phone } from 'lucide-react'
-import { FormContacto } from './forms/FormContacto'
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { FormContacto } from "./forms/FormContacto";
+
+const CONTACT_INFO = [
+  { icon: Mail, title: "Email", info: "saltaget@gmail.com" },
+  { icon: Phone, title: "Teléfono", info: "+54 387 6050-942" },
+  { icon: MapPin, title: "Ubicación", info: "Salta, Argentina" },
+];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
+};
 
 const Contacto = () => {
   return (
     <section
-        id="contacto"
-        className="py-32 bg-gradient-to-t from-slate-900/50 to-transparent"
-      >
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-              ¿Listo para innovar?
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-              Contáctanos y descubre cómo podemos transformar tu visión en una
-              realidad digital exitosa
-            </p>
+      id="contacto"
+      className="border-y border-slate-200/70 bg-slate-50/70 py-24 backdrop-blur-sm dark:border-slate-800/70 dark:bg-slate-900/50 sm:py-32"
+    >
+      <div className="container mx-auto max-w-6xl px-6">
+        <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+            Contacto
+          </span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+            ¿Listo para innovar?
+          </h2>
+          <p className="mt-4 text-lg text-slate-600 dark:text-slate-400">
+            Contáctanos y descubre cómo podemos transformar tu visión en una
+            realidad digital exitosa.
+          </p>
+        </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <label
-                className="bg-gradient-to-r font-bold from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-12 py-6 text-xl rounded-full shadow-lg shadow-cyan-500/25 border-0"
-              >
-                Empieza Ya
-              </label>
-              
-            </motion.div>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                icon: Mail,
-                title: "Email",
-                info: "saltaget@gmail.com",
-                color: "text-cyan-400",
-              },
-              {
-                icon: Phone,
-                title: "Teléfono",
-                info: "+54 387 6050-942",
-                color: "text-blue-400",
-              },
-              {
-                icon: MapPin,
-                title: "Ubicación",
-                info: "Salta, Argentina",
-                color: "text-purple-400",
-              },
-            ].map((contact, index) => (
-              <motion.div
-                key={contact.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.05 }}
-                className="text-center group"
-              >
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:from-cyan-500/30 group-hover:to-blue-500/30 transition-all duration-300">
-                  <contact.icon className={`w-8 h-8 ${contact.color}`} />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {contact.title}
-                </h3>
-                <p className="text-gray-300 group-hover:text-white transition-colors duration-300">
-                  {contact.info}
-                </p>
-                
-              </motion.div>
-            ))}
-          </div>
-          <FormContacto />
+        <div className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-3">
+          {CONTACT_INFO.map((contact) => (
+            <div
+              key={contact.title}
+              className="flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-6 text-center dark:border-slate-800 dark:bg-slate-900"
+            >
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                <contact.icon className="h-5 w-5" />
+              </span>
+              <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                {contact.title}
+              </span>
+              <span className="font-semibold">{contact.info}</span>
+            </div>
+          ))}
         </div>
-      </section>
-  )
-}
 
-export default Contacto
+        <FormContacto />
+      </div>
+    </section>
+  );
+};
+
+export default Contacto;
